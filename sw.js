@@ -1,5 +1,5 @@
 // Lernhub Service Worker: Seite auch ohne Netz öffnen. Immer zuerst aus dem Netz (damit neue Links sofort ankommen), sonst aus dem Cache.
-const CACHE = 'lernhub-v1';
+const CACHE = 'lernhub-v2';
 const SHELL = ['/', '/index.html', '/hub.css', '/tokens.css', '/links.js', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
