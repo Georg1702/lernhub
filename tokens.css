@@ -1,0 +1,142 @@
+/* Design-Tokens „Arbeitsbuch“ – Mathe-Trainer
+   Bereiche: [data-area="arena"] (Franziskas Arena) und [data-area="hub"] (Eltern- & Nachhilfe-Hub)
+   Dunkelmodus: „Tafel“ (data-theme="tafel" oder Systemeinstellung) */
+
+/* Ziffern im Fließtext: Atkinson zeichnet die 0 durchgestrichen (verwechselbar mit Ø).
+   Nur die Ziffern 0–9 kommen daher aus der Systemschrift (Segoe UI / Helvetica Neue / Arial). */
+@font-face { font-family: "Ziffern"; src: local("Segoe UI"), local("SegoeUI"), local("Helvetica Neue"), local("HelveticaNeue"), local("Arial"), local("ArialMT"), local("Liberation Sans"), local("DejaVu Sans"); unicode-range: U+0030-0039; }
+@font-face { font-family: "Ziffern"; font-weight: 700; src: local("Segoe UI Bold"), local("SegoeUI-Bold"), local("Helvetica Neue Bold"), local("HelveticaNeue-Bold"), local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("DejaVu Sans Bold"); unicode-range: U+0030-0039; }
+
+:root {
+  /* ---- Papier (Flächen) ---- */
+  --paper:        #F5EFE3;  /* Seitenhintergrund, ungebleichtes Papier */
+  --sheet:        #FBF8F1;  /* Arbeitsblatt, Eingabeflächen */
+  --card:         #FFFDF8;  /* Karteikarte */
+  --paper-deep:   #ECE4D3;  /* abgesetzte Zonen, Register */
+  --cardboard:    #DED2BB;  /* Heftrücken, inaktive Reiter */
+
+  /* ---- Tinte (Text) ---- */
+  --ink:          #1F2933;  /* Haupttext 12,9:1 auf --paper */
+  --ink-2:        #4F5963;  /* Sekundärtext 6,2:1 */
+  --ink-3:        #7B8086;  /* nur Hilfslinien, Platzhalter, ≥ 24 px Text (3,5:1) */
+
+  /* ---- Linien & Raster ---- */
+  --rule:         #D8CDB8;  /* Trennlinien, Rahmen */
+  --grid:         #E2D8C5;  /* Karo-Raster im Rechenfeld */
+  --grid-margin:  #D9A79A;  /* Heftrand (Randlinie) */
+
+  /* ---- Akzente ---- */
+  --royal:        #24468A;  /* Tintenblau (Füllfeder): Primäraktionen, Fokus – 7,9:1 */
+  --royal-soft:   #E3E9F5;
+  --on-royal:     #FFFFFF;  /* Text auf Tintenblau – 9,1:1 */
+  --moss:         #2F6B3F;  /* richtig, geschafft – 5,6:1 */
+  --moss-soft:    #E2EEE2;
+  --rust:         #A3432C;  /* „noch nicht“, Hinweis – Rötel statt Rotstift – 5,4:1 */
+  --rust-soft:    #F6E3DC;
+  --brass:        #B8862B;  /* Stempel, XP, Abzeichen (Fläche) */
+  --brass-ink:    #8A5F12;  /* Messing als Text – 4,9:1 */
+  --brass-soft:   #F4E8CC;
+
+  /* ---- Textmarker (Station Textaufgaben) ---- */
+  --mark-yellow:  #F3D65E;  /* Gesamt */
+  --mark-green:   #B5DA97;  /* Teile */
+  --mark-orange:  #F4B072;  /* Frage */
+
+  /* ---- Diagramme (Hub) ---- */
+  --series-training:   var(--royal);
+  --series-schularbeit: var(--rust);
+
+  /* ---- Schrift ---- */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;          /* Überschriften, große Zahlen */
+  --font-text:    "Ziffern", "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif; /* UI, Aufgaben */
+  --font-math:    var(--font-display); /* Rechnungen: Fraunces mit Tabellenziffern (Atkinson hat eine durchgestrichene 0 – verwechselbar mit Ø) */
+  --math-features: "lnum" 1, "tnum" 1;
+
+  --fs-xs:   0.8125rem;  /* 13 – nur Hub-Metadaten */
+  --fs-sm:   0.9375rem;  /* 15 */
+  --fs-base: 1.125rem;   /* 18 – Grundgröße Tablet */
+  --fs-lg:   1.375rem;   /* 22 */
+  --fs-xl:   1.75rem;    /* 28 – Aufgabenzahl, Kartentitel */
+  --fs-2xl:  2.25rem;    /* 36 – Seitentitel */
+  --fs-3xl:  3rem;       /* 48 – Level, große Rechnung */
+  --lh-tight: 1.15;
+  --lh-text:  1.5;
+  --fw-text: 400; --fw-medium: 500; --fw-bold: 700;
+
+  /* ---- Abstand (4-px-Raster) ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+  --grid-cell: 24px;    /* Karo-Kästchen im Rechenfeld */
+  --page-max: 1080px;   /* Arena */
+  --hub-max: 1280px;
+
+  /* ---- Bedienung (Touch-First) ---- */
+  --touch-min: 48px;     /* jedes tippbare Element */
+  --touch-primary: 56px; /* Hauptaktion */
+  --touch-gap: 8px;      /* Mindestabstand zwischen Zielen */
+
+  /* ---- Form ---- */
+  --radius-xs: 4px;   /* Eingaben, Chips */
+  --radius-sm: 6px;   /* Knöpfe */
+  --radius-md: 10px;  /* Karteikarten, Blätter */
+  --radius-round: 999px; /* nur Stempel/Fortschritt */
+  --border: 1px solid var(--rule);
+  --border-strong: 2px solid var(--ink);
+
+  /* Papier-Schatten: warm, flach, zweistufig */
+  --shadow-1: 0 1px 0 rgba(70, 50, 20, .06), 0 2px 6px -2px rgba(70, 50, 20, .18);
+  --shadow-2: 0 1px 0 rgba(70, 50, 20, .06), 0 10px 24px -12px rgba(70, 50, 20, .35);
+  --shadow-pressed: 0 0 0 rgba(0, 0, 0, 0), inset 0 1px 2px rgba(70, 50, 20, .18);
+
+  /* ---- Bewegung ---- */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-stamp: cubic-bezier(.3, 1.4, .5, 1); /* leichtes Nachfedern nur für Stempel */
+  --dur-1: 120ms;  /* Druck, Hover */
+  --dur-2: 220ms;  /* Wechsel, Einblenden */
+  --dur-3: 420ms;  /* Stempel, Strich-Animation */
+
+  --focus-ring: 0 0 0 3px var(--sheet), 0 0 0 6px var(--royal);
+  color-scheme: light;
+}
+
+/* Hub: dieselbe Welt, ruhiger – helleres Blatt, keine Textur, dichter */
+[data-area="hub"] {
+  --fs-base: 1rem;
+  --texture-opacity: 0;
+}
+
+/* ---- Dunkelmodus „Tafel“ ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="papier"]) {
+    --paper: #1C2420; --sheet: #222C27; --card: #26312B; --paper-deep: #18201C; --cardboard: #2E3A33;
+    --ink: #ECE7DC; --ink-2: #B9B6AC; --ink-3: #8B8D86;
+    --rule: #3A4740; --grid: #2C3832; --grid-margin: #6B4A42;
+    --royal: #8FB0F0; --royal-soft: #26334A; --on-royal: #10203F;
+    --moss: #8CC79A; --moss-soft: #23382A;
+    --rust: #F0A08A; --rust-soft: #3E2A24;
+    --brass: #D9AE55; --brass-ink: #E6C27A; --brass-soft: #3A3122;
+    --mark-yellow: #8C7A1E; --mark-green: #3F6B33; --mark-orange: #8A5222;
+    --shadow-1: 0 1px 0 rgba(0,0,0,.3), 0 2px 6px -2px rgba(0,0,0,.5);
+    --shadow-2: 0 10px 24px -12px rgba(0,0,0,.7);
+    --focus-ring: 0 0 0 3px var(--paper), 0 0 0 6px var(--royal);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="tafel"] {
+  --paper: #1C2420; --sheet: #222C27; --card: #26312B; --paper-deep: #18201C; --cardboard: #2E3A33;
+  --ink: #ECE7DC; --ink-2: #B9B6AC; --ink-3: #8B8D86;
+  --rule: #3A4740; --grid: #2C3832; --grid-margin: #6B4A42;
+  --royal: #8FB0F0; --royal-soft: #26334A; --on-royal: #10203F;
+  --moss: #8CC79A; --moss-soft: #23382A;
+  --rust: #F0A08A; --rust-soft: #3E2A24;
+  --brass: #D9AE55; --brass-ink: #E6C27A; --brass-soft: #3A3122;
+  --mark-yellow: #8C7A1E; --mark-green: #3F6B33; --mark-orange: #8A5222;
+  --shadow-1: 0 1px 0 rgba(0,0,0,.3), 0 2px 6px -2px rgba(0,0,0,.5);
+  --shadow-2: 0 10px 24px -12px rgba(0,0,0,.7);
+  --focus-ring: 0 0 0 3px var(--paper), 0 0 0 6px var(--royal);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; }
+}

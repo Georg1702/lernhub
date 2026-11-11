@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F5EFE3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1C2420" media="(prefers-color-scheme: dark)">
+  <title>Lernhub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Fraunces:opsz,wght,SOFT@9..144,400..700,50..100&display=swap">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="hub.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23B8862B'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23FBF8F1' font-family='Georgia' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+  <script src="links.js"></script>
+</head>
+<body>
+  <main class="wrap" data-area="arena">
+    <header class="head">
+      <p class="eyebrow" id="hello">Hallo!</p>
+      <h1>Lernhub</h1>
+      <p class="lead">Such dir ein Heft aus und leg los.</p>
+    </header>
+
+    <nav class="shelf" aria-label="Trainings">
+      <a class="book c-royal" data-key="mathe">
+        <span class="spine" aria-hidden="true"></span>
+        <span class="label"><span class="mark">M</span><span class="kind">Heft 1</span></span>
+        <span class="title">Mathe-Trainer</span>
+        <span class="topics">Teilbarkeit &amp; Primzahlen · ggT &amp; kgV · Brüche &amp; Dezimalzahlen · Textaufgaben</span>
+        <span class="go" data-go>Öffnen →</span>
+      </a>
+      <a class="book c-moss" data-key="englisch">
+        <span class="spine" aria-hidden="true"></span>
+        <span class="label"><span class="mark">E</span><span class="kind">Heft 2</span></span>
+        <span class="title">Englisch-Trainer</span>
+        <span class="topics">Vokabel-Buddy · Unregelmäßige Verben · Zeiten · Writing · Probe-Schularbeit</span>
+        <span class="go" data-go>Öffnen →</span>
+      </a>
+    </nav>
+
+    <p class="foot">Anmelden mit deiner PIN im jeweiligen Training.</p>
+  </main>
+  <script>
+    (function () {
+      var h = new Date().getHours();
+      document.getElementById('hello').textContent = h < 11 ? 'Guten Morgen!' : h < 18 ? 'Hallo!' : 'Guten Abend!';
+      var links = window.LERNHUB_LINKS || {};
+      document.querySelectorAll('.book').forEach(function (a) {
+        var url = links[a.dataset.key];
+        if (url && /^https:\/\//.test(url)) a.href = url;
+        else { a.classList.add('off'); a.setAttribute('aria-disabled', 'true'); a.querySelector('[data-go]').textContent = 'Link folgt'; }
+      });
+    })();
+  </script>
+</body>
+</html>
