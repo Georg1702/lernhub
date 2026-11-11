@@ -8,4 +8,8 @@ In `links.js` die Adressen der beiden Vercel-Projekte eintragen und committen. L
 
 ## Vercel
 
-Projekt aus dem Repo importieren, Preset **Other**, keine Umgebungsvariablen. Suchmaschinen sind per `robots.txt` und `X-Robots-Tag` ausgesperrt.
+Projekt aus dem Repo importieren, Preset **Other**, keine Umgebungsvariablen. Build und Ausgabeordner stehen in `vercel.json` (`node build.mjs` → `dist/`). Suchmaschinen sind per `robots.txt` und `X-Robots-Tag` ausgesperrt.
+
+## App-Symbol (PWA)
+
+Manifest, Service Worker und Icons sind dabei. Android/Chrome: Knopf „Als App auf den Startbildschirm“ oder Menü → „App installieren“. iPhone/iPad: Safari → Teilen → „Zum Home-Bildschirm“. Funktioniert nur über HTTPS (Vercel). Die PNG-Icons zeichnet `build.mjs` beim Build (ohne Abhängigkeiten).

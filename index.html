@@ -12,7 +12,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Fraunces:opsz,wght,SOFT@9..144,400..700,50..100&display=swap">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="hub.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23B8862B'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23FBF8F1' font-family='Georgia' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lernhub">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <script src="links.js"></script>
 </head>
 <body>
@@ -41,6 +47,7 @@
     </nav>
 
     <p class="foot">Anmelden mit deiner PIN im jeweiligen Training.</p>
+    <p class="install" id="install" hidden></p>
   </main>
   <script>
     (function () {
@@ -52,6 +59,23 @@
         if (url && /^https:\/\//.test(url)) a.href = url;
         else { a.classList.add('off'); a.setAttribute('aria-disabled', 'true'); a.querySelector('[data-go]').textContent = 'Link folgt'; }
       });
+    })();
+
+    // Als App auf dem Startbildschirm: Android/Chrome mit Knopf, iPhone/iPad mit Hinweis
+    (function () {
+      var box = document.getElementById('install');
+      var standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+      if (standalone) return;
+      var prompt = null;
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault(); prompt = e;
+        box.innerHTML = '<button type="button" class="install-btn">Als App auf den Startbildschirm</button>';
+        box.hidden = false;
+        box.querySelector('button').onclick = function () { prompt.prompt(); prompt.userChoice.finally(function () { box.hidden = true; }); };
+      });
+      var ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (ios) { box.textContent = 'Tipp: In Safari auf „Teilen“ und dann „Zum Home-Bildschirm“ tippen – dann ist der Lernhub ein App-Symbol.'; box.hidden = false; }
     })();
   </script>
 </body>

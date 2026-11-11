@@ -1,10 +1,10 @@
 /* Lernhub – gleiche Arbeitsbuch-Tokens wie Mathe- und Englisch-Trainer */
 * { box-sizing: border-box; }
-html, body { margin: 0; min-height: 100%; background: var(--paper); color: var(--ink); }
+html, body { margin: 0; -webkit-tap-highlight-color: transparent; min-height: 100%; background: var(--paper); color: var(--ink); }
 body { font: var(--fw-text) var(--fs-base)/var(--lh-text) var(--font-text); -webkit-font-smoothing: antialiased; }
 body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: .035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-.wrap { max-width: 960px; margin: 0 auto; padding: clamp(32px, 9vh, 96px) var(--sp-5) var(--sp-7); }
+.wrap { max-width: 960px; margin: 0 auto; padding: max(clamp(32px, 9vh, 96px), env(safe-area-inset-top)) var(--sp-5) max(var(--sp-7), env(safe-area-inset-bottom)); }
 
 .head { margin-bottom: var(--sp-6); }
 .eyebrow { margin: 0 0 var(--sp-1); font-weight: var(--fw-bold); color: var(--brass-ink); letter-spacing: .04em; }
@@ -34,6 +34,9 @@ h1 { margin: 0; font: 600 clamp(2.5rem, 7vw, 4rem)/1.05 var(--font-display); fon
 .book.off .go { background: var(--paper-deep); color: var(--ink-2); }
 
 .foot { margin-top: var(--sp-6); color: var(--ink-2); font-size: var(--fs-sm); }
+.install { margin-top: var(--sp-3); color: var(--ink-2); font-size: var(--fs-sm); max-width: 52ch; }
+.install-btn { min-height: var(--touch-min); padding: 0 var(--sp-5); border: 1.5px solid var(--ink); border-radius: var(--radius-sm); background: var(--card); color: var(--ink); font: var(--fw-bold) var(--fs-base) var(--font-text); box-shadow: 0 2px 0 var(--rule); cursor: pointer; }
+.install-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 
 @media (max-width: 680px) {
   .wrap { padding-left: var(--sp-4); padding-right: var(--sp-4); }
